@@ -38,7 +38,7 @@ foreach ($pool as $p) {
     }
 }
 
-echo "$hiprod $count\n";
+echo "$hiprod\n";
 
 
 function minlength($s)
