@@ -3,7 +3,7 @@
 $prime_list = array(2); // 2 is on the list fo sho!
 
 $i = 3;
-while (count($prime_list) < 25) {
+while (count($prime_list) < 10001) {
     $ip = is_prime($i, $prime_list);
     $i = $i + 2; // don't bother checking even numbers, 2 is the only even prime
 }
