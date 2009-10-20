@@ -1,13 +1,15 @@
 <?php
 
-for ($i = 1; $i < 20; $i++) {
-    $w = number_words($i);
-    echo "$w\n";
+$w = "";
+for ($i = 1; $i <= 1000; $i++) {
+    $w = $w . number_words($i);
 }
-
+$w = preg_replace('/\s+/', '', $w);
+$count = strlen($w);
+echo "$count\n";
 
 function number_words($num) {
-    $digits = array( '0',
+    $digits = array( '',
         'one', 'two', 'three',
         'four', 'five', 'six',
         'seven', 'eight', 'nine'
@@ -25,6 +27,8 @@ function number_words($num) {
         'eighty', 'ninety'
     );
 
+    $num = (string) $num;
+
     if ($num > 0 && $num < 10) {
         return $digits[$num];
     }
@@ -32,14 +36,20 @@ function number_words($num) {
     if ($num >= 10 && $num < 20) {
         return $teens[$num - 10];
     }
-/*
-    $num = (string) $num;
-    $num = strrev($num);
 
-    $words = array();
-    for ($d = 0; $d < strlen($num); $d++) {
-        $words[] = $digits[$num[$d]];
+
+    if ($num >= 20 && $num < 100) {
+        return $dec[$num[0]] . ' ' . number_words($num[1]);
     }
-    */
+
+    if ($num >= 100 && $num < 1000 && ($num % 100 == 0)) {
+        return number_words($num[0]) . ' hundred';
+    }
+
+    if ($num > 100 && $num < 1000) {
+        return number_words($num[0]) . ' hundred and ' . number_words($num - ($num[0] * 100));
+    }
+
+    if ($num == 1000) return number_words($num[0]) . ' thousand';
 }
 
